@@ -1,0 +1,60 @@
+
+FileDescriptor :: i32
+
+FileFlags :: enum u32 #flags {
+    RDONLY    :: 0x0000     /* open for reading only */
+    WRONLY    :: 0x0001     /* open for writing only */
+    RDWR      :: 0x0002     /* open for reading and writing */
+    ACCMODE   :: 0x0003     /* mask for above modes */
+    NONBLOCK  :: 0x0004     /* no delay */
+    APPEND    :: 0x0008     /* set append mode */
+    SHLOCK    :: 0x0010     /* open with shared file lock */
+    EXLOCK    :: 0x0020     /* open with exclusive file lock */
+    ASYNC     :: 0x0040     /* signal pgrp when data ready */
+    SYNC      :: 0x0080     /* synch I/O file integrity */
+    NOFOLLOW  :: 0x0100     /* don't follow symlinks */
+    CREAT     :: 0x0200     /* create if nonexistant */
+    TRUNC     :: 0x0400     /* truncate to zero length */
+    EXCL      :: 0x0800     /* error if already exists */
+    NOCTTY    :: 0x20000    /* don't assign controlling terminal */
+    DIRECTORY :: 0x100000
+    SYMLINK   :: 0x200000   /* allow open of a symlink */
+    DSYNC     :: 0x400000   /* synch I/O data integrity */
+    CLOEXEC   :: 0x1000000  /* implicitly set FD_CLOEXEC */
+
+    POPUP     :: 0x80000000 /* force window to popup on open */
+    ALERT     :: 0x20000000 /* small, clean popup window */
+}
+
+FileMode :: enum u32 #flags {
+
+    /* File type */
+    IFMT   :: 0o170000 /* [XSI] type of file mask */
+    IFIFO  :: 0o010000 /* [XSI] named pipe (fifo) */
+    IFCHR  :: 0o020000 /* [XSI] character special */
+    IFDIR  :: 0o040000 /* [XSI] directory */
+    IFBLK  :: 0o060000 /* [XSI] block special */
+    IFREG  :: 0o100000 /* [XSI] regular */
+    IFLNK  :: 0o120000 /* [XSI] symbolic link */
+    IFSOCK :: 0o140000 /* [XSI] socket */
+
+    /* Read, write, execute/search by owner */
+    IRWXU :: 0o00700 /* [XSI] RWX mask for owner */
+    IRUSR :: 0o00400 /* [XSI] R for owner */
+    IWUSR :: 0o00200 /* [XSI] W for owner */
+    IXUSR :: 0o00100 /* [XSI] X for owner */
+    /* Read, write, execute/search by group */
+    IRWXG :: 0o00070 /* [XSI] RWX mask for group */
+    IRGRP :: 0o00040 /* [XSI] R for group */
+    IWGRP :: 0o00020 /* [XSI] W for group */
+    IXGRP :: 0o00010 /* [XSI] X for group */
+    /* Read, write, execute/search by others */
+    IRWXO :: 0o00007 /* [XSI] RWX mask for other */
+    IROTH :: 0o00004 /* [XSI] R for other */
+    IWOTH :: 0o00002 /* [XSI] W for other */
+    IXOTH :: 0o00001 /* [XSI] X for other */
+
+    ISUID :: 0o04000 /* [XSI] set user id on execution */
+    ISGID :: 0o02000 /* [XSI] set group id on execution */
+    ISVTX :: 0o01000 /* [XSI] directory restrcted delete */
+}

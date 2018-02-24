@@ -1,0 +1,19 @@
+
+#import "darwin/syscall.kai"
+#import "darwin/file_management.kai" _
+
+Read :: fn(fd: FileDescriptor, buf: rawptr, nbytes: u64) -> i64 {
+    return autocast syscall.Syscall3(syscall.Syscall.Read, autocast fd, autocast buf, nbytes)
+}
+
+Write :: fn(fd: FileDescriptor, data: rawptr, len: u64) -> i64 {
+    return autocast syscall.Syscall3(syscall.Syscall.Write, autocast fd, autocast data, len)
+}
+
+Open :: fn(path: string, flags: FileFlags, mode: FileMode) -> FileDescriptor {
+    return autocast syscall.Syscall3(syscall.Syscall.Open, autocast path.raw, autocast flags, autocast mode)
+}
+
+Close :: fn(fd: FileDescriptor) -> i32 {
+    return autocast syscall.Syscall1(syscall.Syscall.Close, autocast fd)
+}

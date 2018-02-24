@@ -1,0 +1,12 @@
+
+#import "darwin/syscall.kai" _
+
+Pid :: i32
+
+Exit :: fn(rval: i32) -> void {
+    Syscall1(Syscall.Exit, autocast rval)
+}
+
+Fork :: fn() -> Pid {
+    return autocast Syscall0(Syscall.Fork)
+}
