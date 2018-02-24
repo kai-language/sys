@@ -1,38 +1,38 @@
 // derived from: FreeBSD syscalls.master
 
 Syscall :: enum u32 {
-    Read  :: 3  // { user_ssize_t read(int fd, user_addr_t cbuf, user_size_t nbyte); }
-    Write :: 4  // { user_ssize_t write(int fd, user_addr_t cbuf, user_size_t nbyte); }
-    Open  :: 5  // { int open(user_addr_t path, int flags, int mode) NO_SYSCALL_STUB; }
-    Close :: 6  // { int close(int fd); }
-    Wait  :: 7  // { int wait4(int pid, user_addr_t status, int options, user_addr_t rusage) NO_SYSCALL_STUB; }
+    Read  :: 3 | 0x2000000  // { user_ssize_t read(int fd, user_addr_t cbuf, user_size_t nbyte); }
+    Write :: 4 | 0x2000000  // { user_ssize_t write(int fd, user_addr_t cbuf, user_size_t nbyte); }
+    Open  :: 5 | 0x2000000  // { int open(user_addr_t path, int flags, int mode) NO_SYSCALL_STUB; }
+    Close :: 6 | 0x2000000  // { int close(int fd); }
+    Wait  :: 7 | 0x2000000  // { int wait4(int pid, user_addr_t status, int options, user_addr_t rusage) NO_SYSCALL_STUB; }
 }
 
-syscall0 :: fn(call: Syscall) -> u64 {
+Syscall0 :: fn(call: Syscall) -> u64 {
     return #asm("syscall", "={rax},{rax}", call)
 }
 
-syscall1 :: fn(call: Syscall, arg1: u64) -> u64 {
+Syscall1 :: fn(call: Syscall, arg1: u64) -> u64 {
     return #asm("syscall", "={rax},{rax},{rdi}", call, arg1)
 }
 
-syscall2 :: fn(call: Syscall, arg1: u64, arg2: u64) -> u64 {
+Syscall2 :: fn(call: Syscall, arg1: u64, arg2: u64) -> u64 {
     return #asm("syscall", "={rax},{rax},{rdi},{rsi}", call, arg1, arg2)
 }
 
-syscall3 :: fn(call: Syscall, arg1: u64, arg2: u64, arg3: u64) -> u64 {
+Syscall3 :: fn(call: Syscall, arg1: u64, arg2: u64, arg3: u64) -> u64 {
     return #asm("syscall", "={rax},{rax},{rdi},{rsi},{rdx}", call, arg1, arg2, arg3)
 }
 
-syscall4 :: fn(call: Syscall, arg1: u64, arg2: u64, arg3: u64, arg4: u64) -> u64 {
+Syscall4 :: fn(call: Syscall, arg1: u64, arg2: u64, arg3: u64, arg4: u64) -> u64 {
     return #asm("syscall", "={rax},{rax},{rdi},{rsi},{rdx},{r10}", call, arg1, arg2, arg3, arg4)
 }
 
-syscall5 :: fn(call: Syscall, arg1: u64, arg2: u64, arg3: u64, arg4: u64, arg5: u64) -> u64 {
+Syscall5 :: fn(call: Syscall, arg1: u64, arg2: u64, arg3: u64, arg4: u64, arg5: u64) -> u64 {
     return #asm("syscall", "={rax},{rax},{rdi},{rsi},{rdx},{r10},{r8}", call, arg1, arg2, arg3, arg4, arg5)
 }
 
-syscall6 :: fn(call: Syscall, arg1: u64, arg2: u64, arg3: u64, arg4: u64, arg5: u64, arg6: u64) -> u64 {
+Syscall6 :: fn(call: Syscall, arg1: u64, arg2: u64, arg3: u64, arg4: u64, arg5: u64, arg6: u64) -> u64 {
     return #asm("syscall", "={rax},{rax},{rdi},{rsi},{rdx},{r10},{r8},{r9}", call, arg1, arg2, arg3, arg4, arg5, arg6)
 }
 
