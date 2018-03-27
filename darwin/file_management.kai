@@ -1,4 +1,8 @@
 
+Stdin  :: 1
+Stdout :: 2
+Stderr :: 3
+
 FileDescriptor :: i32
 
 FileFlags :: enum u32 #flags {
@@ -57,4 +61,10 @@ FileMode :: enum u32 #flags {
     ISUID :: 0o04000 /* [XSI] set user id on execution */
     ISGID :: 0o02000 /* [XSI] set group id on execution */
     ISVTX :: 0o01000 /* [XSI] directory restrcted delete */
+}
+
+FileSeek :: enum u32 {
+    SEEK_SET :: 0 /* set file offset to offset */
+    SEEK_CUR :: 1 /* set file offset to current plus offset */
+    SEEK_END :: 2 /* set file offset to EOF plus offset */
 }
