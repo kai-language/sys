@@ -64,7 +64,37 @@ FileMode :: enum u32 #flags {
 }
 
 FileSeek :: enum u32 {
-    SEEK_SET :: 0 /* set file offset to offset */
-    SEEK_CUR :: 1 /* set file offset to current plus offset */
-    SEEK_END :: 2 /* set file offset to EOF plus offset */
+    SET :: 0 /* set file offset to offset */
+    CUR :: 1 /* set file offset to current plus offset */
+    END :: 2 /* set file offset to EOF plus offset */
+}
+
+
+// from sys/mman.h
+
+Prot :: enum u32 {
+    NONE  :: 0x00 /* [MC2] no permissions */
+    READ  :: 0x01 /* [MC2] pages can be read */
+    WRITE :: 0x02 /* [MC2] pages can be written */
+    EXEC  :: 0x04 /* [MC2] pages can be executed */
+}
+
+MapFlags :: enum u32 {
+    // Flags contain sharing type and options.
+    // Sharing types; choose one.
+    SHARED       :: 0x0001 /* [MF|SHM] share changes */
+    PRIVATE      :: 0x0002 /* [MF|SHM] changes are private */
+
+    // Other flags
+    FIXED        :: 0x0010 /* [MF|SHM] interpret addr exactly */
+    RENAME       :: 0x0020 /* Sun: rename private pages to file */
+    NORESERVE    :: 0x0040 /* Sun: don't reserve needed swap area */
+    RESERVED0080 :: 0x0080 /* previously unimplemented MAP_INHERIT */
+    NOEXTEND     :: 0x0100 /* for MAP_FILE, don't change file size */
+    HASSEMAPHORE :: 0x0200 /* region may contain semaphores */
+    NOCACHE      :: 0x0400 /* don't cache pages for this mapping */
+
+    // Mapping type
+    FILE         :: 0x0000 /* map from file (default) */
+    ANON         :: 0x1000 /* allocated from memory, swap space */
 }
