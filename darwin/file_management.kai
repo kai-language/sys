@@ -98,3 +98,5 @@ MapFlags :: enum u32 {
     FILE         :: 0x0000 /* map from file (default) */
     ANON         :: 0x1000 /* allocated from memory, swap space */
 }
+
+MAP_FAILED :: bitcast(rawptr)-1 /* [MF|SHM] mmap failed */
